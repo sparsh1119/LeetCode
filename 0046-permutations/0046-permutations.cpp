@@ -1,6 +1,6 @@
 class Solution {
 
-public:
+private:
     void solve(vector<int>nums,vector<vector<int>>& ans, int index){
         //base case
         if(index>=nums.size()){
@@ -17,6 +17,7 @@ public:
         }
     }
 
+public:
     vector<vector<int>> permute(vector<int>& nums) {
         vector<vector<int>>ans;
         int index =0;
