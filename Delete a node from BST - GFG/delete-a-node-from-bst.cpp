@@ -108,7 +108,7 @@ int main() {
 // } Driver Code Ends
 
 int minVal(Node* root) {
-    if(root ==NULL)return -1;
+    //if(root ==NULL)return -1;
     // Code here
     Node* temp = root;
     while(temp->left != NULL){
