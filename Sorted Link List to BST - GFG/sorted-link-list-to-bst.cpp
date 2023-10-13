@@ -72,35 +72,24 @@ struct TNode
 }; */
 class Solution{
   public:
-    int countNodes(LNode* head){
-        int cnt = 0;
-        LNode* temp = head;
-        while(temp!=NULL){
-            cnt++;
-            temp= temp->next;
+    TNode* buildTree(LNode* head , LNode* tail){
+        if(head == tail) return NULL;
+        
+        LNode* slow = head , *fast = head;
+        while(fast != tail && fast->next != tail){
+            fast = fast->next->next;
+            slow = slow ->next;
         }
-        return cnt;
+        
+        TNode* root = new TNode(slow->data);
+        root->left = buildTree(head , slow);
+        root->right = buildTree(slow->next , tail);
     }
-    
-    TNode* solve(LNode* &head , int n){
-        if(n<=0 || head ==NULL)
-        return NULL;
-        
-        TNode* leftSubtree = solve(head,n/2);
-        
-        TNode* root = new TNode(head->data);
-        root->left = leftSubtree;
-        
-        head = head->next;
-        
-        root->right = solve(head,n-n/2-1);
-        
-        return root;
-    }
-    
+  
     TNode* sortedListToBST(LNode *head) {
         //code here
-        return solve(head,countNodes(head));
+        LNode* tail = NULL;
+        return buildTree(head, tail);
     }
 };
 
