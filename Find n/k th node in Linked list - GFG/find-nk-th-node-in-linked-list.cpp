@@ -78,10 +78,10 @@ int fractional_node(struct Node *head, int k)
         cnt++;
     }
     
-    int j = cnt/k;
+     k = cnt/k;
     Node* curr = head;
     
-    for(int i =1 ; i<=j ; i++ ){
+    for(int i =1 ; i<=k ; i++ ){
         curr= curr->next;
     }
     
