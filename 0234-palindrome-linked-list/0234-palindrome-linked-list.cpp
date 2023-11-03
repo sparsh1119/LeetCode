@@ -8,43 +8,59 @@
  *     ListNode(int x, ListNode *next) : val(x), next(next) {}
  * };
  */
+
 class Solution {
+private:
+    ListNode* getMid(ListNode* &head) {
+        ListNode* slow = head;
+        ListNode* fast = head->next;
+
+        while (fast != NULL && fast->next != NULL) {
+            slow = slow->next;
+            fast = fast->next->next;
+        }
+        return slow;
+    }
+
+    ListNode* reverse(ListNode* &head) {
+        ListNode* curr = head;
+        ListNode* prev = NULL;
+        ListNode* forw = NULL;
+
+        while (curr != NULL) {
+            forw = curr->next;
+            curr->next = prev;
+            prev = curr;
+            curr = forw;
+        }
+        return prev;
+    }
+
 public:
     bool isPalindrome(ListNode* head) {
-        //BASE CASE
-        if(head->next == nullptr) return true;
-
-        ListNode *fast = head;
-        ListNode *slow = head;
-        ListNode *prev = NULL;
-
-        // Finding Mid Using 2 pointer approach
-        // Reversing the first half of linked list
-        while(fast && fast->next != NULL){
-            head = head->next;
-            fast = fast->next->next;
-            slow->next = prev;
-            prev = slow;
-            slow = head;
+        if (head == nullptr || head->next == nullptr) {
+            return true; // Empty list or single node is considered a palindrome.
         }
 
-        // If the length of linked list is odd
-        if(fast != NULL){
-            head = head->next;
-        } 
+        ListNode* middle = getMid(head);
+        ListNode* temp = middle->next;
+        middle->next = reverse(temp);
 
-        // Checking for palindrome
-        while(head != nullptr){
-            if(head->val != prev->val) return false;
-            head = head->next;
-            prev = prev->next;
+        ListNode* head1 = head;
+        ListNode* head2 = middle->next;
+
+        while (head2 != nullptr) {
+            if (head2->val != head1->val) {
+                return false; // Not a palindrome.
+            }
+
+            head1 = head1->next;
+            head2 = head2->next;
         }
 
-        return true;
-
+        return true; // It's a palindrome.
     }
 };
-
 
 
 
