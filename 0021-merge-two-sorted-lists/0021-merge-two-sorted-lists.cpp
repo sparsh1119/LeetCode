@@ -35,9 +35,9 @@ public:
             curr->next = list2;
         }
         
-        head = head->next;
-        
-        return head;
+        ListNode* result = head->next;
+        delete head;
+        return result;
         
         
         
