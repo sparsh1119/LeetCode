@@ -11,7 +11,7 @@ class Solution {
 
         // Check the last word's last character with the first word's first character
         if (!arr[arr.length - 1].substring(arr[arr.length - 1].length() - 1)
-                .equalsIgnoreCase(String.valueOf(arr[0].charAt(0)))) {
+                .equals(String.valueOf(arr[0].charAt(0)))) {
             return false;
         }
 
